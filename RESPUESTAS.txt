@@ -1,0 +1,31 @@
+
+
+1. POSIBLES CONDICIONES CARRERA
+
+Las condiciones carrera que pueden pasar son:
+
+    * Si las serpientes se encuentran al comer un mismo raton puede existir una condicion carrera ya que podrian crecer ambas.
+
+    * Si las serpientes se encuentran en una casilla de velocidad al mismo tiempo pude existir una condicion carrera ya que ambas o ninguna podria recibir el boost.
+
+    
+
+    
+Uso inadecuado de las colecciones: 
+
+    * Acceso de los hilos a las celdas todos los hilos tienen acceso al recurso compartido que es el tablero.
+
+    * Acceso de los hilos a la creación de comida despues de que una serpiente coma.
+
+    * Acceso de los hilos a la creacion de barreras.
+
+    
+
+Uso innecesario de esperas activas:
+
+    * Siempre que se esta creando ya sea comida o barrearas se esta durmiendo el hilo de manera innecesaria
+
+    * En el metodo run cuando se esta durmiendo el hilo para ver si tiene boost o no
+
+
+

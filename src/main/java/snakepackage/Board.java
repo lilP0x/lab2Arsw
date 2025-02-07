@@ -44,8 +44,7 @@ public class Board extends JLabel implements Observer {
 
 	private void GenerateTurboBoosts() {
 		for (int i = 0; i != NR_TURBO_BOOSTS; i++) {
-			Cell tmp = gameboard[random.nextInt(GridSize.GRID_WIDTH)][random
-					.nextInt(GridSize.GRID_HEIGHT)];
+			Cell tmp = gameboard[random.nextInt(GridSize.GRID_WIDTH)][random.nextInt(GridSize.GRID_HEIGHT)];
 			if (!tmp.hasElements()) {
 				turbo_boosts[i] = tmp;
 				turbo_boosts[i].setTurbo_boost(true);
@@ -57,8 +56,7 @@ public class Board extends JLabel implements Observer {
 
 	private void GenerateJumpPads() {
 		for (int i = 0; i != NR_JUMP_PADS; i++) {
-			Cell tmp = gameboard[random.nextInt(GridSize.GRID_WIDTH)][random
-					.nextInt(GridSize.GRID_HEIGHT)];
+			Cell tmp = gameboard[random.nextInt(GridSize.GRID_WIDTH)][random.nextInt(GridSize.GRID_HEIGHT)];
 			if (!tmp.hasElements()) {
 				jump_pads[i] = tmp;
 				jump_pads[i].setJump_pad(true);

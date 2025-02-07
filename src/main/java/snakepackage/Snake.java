@@ -134,7 +134,6 @@ public class Snake extends Observable implements Runnable {
             }
         }
         return false;
-
     }
 
     private void randomMovement(Cell newCell) {

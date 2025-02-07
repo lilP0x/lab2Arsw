@@ -67,8 +67,6 @@ public class SnakeApp {
 
     private void init() {
         
-        
-        
         for (int i = 0; i != MAX_THREADS; i++) {
             
             snakes[i] = new Snake(i + 1, spawn[i], i + 1);
@@ -92,12 +90,10 @@ public class SnakeApp {
             }
         }
 
-
         System.out.println("Thread (snake) status:");
         for (int i = 0; i != MAX_THREADS; i++) {
             System.out.println("["+i+"] :"+thread[i].getState());
         }
-        
 
     }
 
