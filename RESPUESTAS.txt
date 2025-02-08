@@ -28,4 +28,31 @@ Uso innecesario de esperas activas:
     * En el metodo run cuando se esta durmiendo el hilo para ver si tiene boost o no
 
 
+**Análisis del código y concurrencia en el juego de serpientes**
 
+### 1. Posibles condiciones de carrera
+Las condiciones de carrera pueden ocurrir en los siguientes escenarios:
+- **Acceso concurrente a la lista de serpientes:** Si varias serpientes intentan actualizar sus posiciones al mismo tiempo, puede producirse corrupción de datos.
+- **Acceso y modificación concurrente del estado del juego:** Si un hilo intenta pausar o reanudar el juego mientras otro lo modifica, pueden ocurrir inconsistencias.
+- **Colisiones y detección de muerte:** Si múltiples serpientes interactúan con la misma celda en la cuadrícula al mismo tiempo, puede haber errores en la detección de colisiones.
+
+### 2. Uso inadecuado de colecciones en entornos concurrentes
+- Si la lista de serpientes no es segura para el acceso concurrente, podrían ocurrir excepciones de concurrencia.
+- Se debe usar una `ConcurrentHashMap` o una `CopyOnWriteArrayList` en lugar de `ArrayList` para evitar estos problemas.
+
+### 3. Uso innecesario de esperas activas
+- Si los hilos de las serpientes verifican constantemente el estado del juego en un bucle sin sincronización eficiente, esto puede generar consumo innecesario de CPU.
+- Se debe utilizar `wait()` y `notifyAll()` en lugar de `Thread.sleep()` para gestionar pausas y reanudaciones de manera eficiente.
+
+### 4. Identificación y solución de regiones críticas
+- **Acceso a la lista de serpientes:** Se debe sincronizar con `Collections.synchronizedList()` o utilizar una estructura concurrente.
+- **Gestión del estado del juego:** Se debe usar `synchronized` o `ReentrantLock` para coordinar el acceso a la variable que indica si el juego está pausado o en ejecución.
+- **Manejo de colisiones:** Se puede usar un `ConcurrentHashMap` para asegurar acceso seguro a las posiciones ocupadas por las serpientes.
+
+### 5. Implementación de botones para Iniciar/Pausar/Reanudar
+Para gestionar estos eventos:
+- Se agregarán botones en la interfaz gráfica que permitan iniciar, pausar y reanudar el juego.
+- Se almacenará la información de la serpiente más larga viva y la peor serpiente al pausar el juego.
+- Se garantizará que esta información sea precisa utilizando sincronización adecuada.
+
+Con estas mejoras, se logrará un juego más estable y concurrente sin problemas de condiciones de carrera.

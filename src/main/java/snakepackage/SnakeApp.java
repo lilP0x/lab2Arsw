@@ -24,15 +24,13 @@ public class SnakeApp {
     Snake[] snakes = new Snake[MAX_THREADS];
     private static final Cell[] spawn = {
         new Cell(1, (GridSize.GRID_HEIGHT / 2) / 2),
-        new Cell(GridSize.GRID_WIDTH - 2,
-        3 * (GridSize.GRID_HEIGHT / 2) / 2),
+        new Cell(GridSize.GRID_WIDTH - 2, 3 * (GridSize.GRID_HEIGHT / 2) / 2),
         new Cell(3 * (GridSize.GRID_WIDTH / 2) / 2, 1),
         new Cell((GridSize.GRID_WIDTH / 2) / 2, GridSize.GRID_HEIGHT - 2),
         new Cell(1, 3 * (GridSize.GRID_HEIGHT / 2) / 2),
         new Cell(GridSize.GRID_WIDTH - 2, (GridSize.GRID_HEIGHT / 2) / 2),
         new Cell((GridSize.GRID_WIDTH / 2) / 2, 1),
-        new Cell(3 * (GridSize.GRID_WIDTH / 2) / 2,
-        GridSize.GRID_HEIGHT - 2)};
+        new Cell(3 * (GridSize.GRID_WIDTH / 2) / 2, GridSize.GRID_HEIGHT - 2)};
     private JFrame frame;
     private static Board board;
     int nr_selected = 0;

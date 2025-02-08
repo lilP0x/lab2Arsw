@@ -48,13 +48,12 @@ public class Snake extends Observable implements Runnable {
     @Override
     public void run() {
         while (!snakeEnd) {
-            
             snakeCalc();
-
-            //NOTIFY CHANGES TO GUI
-            setChanged();
-            notifyObservers();
-
+            // NOTIFY CHANGES TO GUI (Protegido con sincronización)
+            synchronized (this) {
+                setChanged();
+                notifyObservers();
+            }
             try {
                 if (hasTurbo == true) {
                     Thread.sleep(500 / 3);
@@ -64,12 +63,8 @@ public class Snake extends Observable implements Runnable {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
         }
-        
         fixDirection(head);
-        
-        
     }
 
     private void snakeCalc() {
@@ -133,7 +128,7 @@ public class Snake extends Observable implements Runnable {
         return false;
     }
 
-    private void randomMovement(Cell newCell) {
+    private synchronized void randomMovement(Cell newCell) {
         Random random = new Random();
         int tmp = random.nextInt(4) + 1;
         if (tmp == Direction.LEFT && !(direction == Direction.RIGHT)) {
