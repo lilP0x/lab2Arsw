@@ -12,6 +12,7 @@ public class Snake extends Observable implements Runnable {
     private int idt;
     private Cell head;
     private Cell newCell;
+    private boolean paused = false;
     private LinkedList<Cell> snakeBody = new LinkedList<Cell>();
     //private Cell objective = null;
     private Cell start = null;
@@ -51,6 +52,13 @@ public class Snake extends Observable implements Runnable {
             snakeCalc();
             // NOTIFY CHANGES TO GUI (Protegido con sincronización)
             synchronized (this) {
+                while (paused) { 
+                    try {
+                        this.wait();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
                 setChanged();
                 notifyObservers();
             }
@@ -66,6 +74,22 @@ public class Snake extends Observable implements Runnable {
         }
         fixDirection(head);
     }
+
+    public void pausedThread(){
+        paused = true;
+    }
+
+    public synchronized void reiniceThread() {
+        paused = false;
+        synchronized (this) {
+            notifyAll();
+        }
+    }
+
+    public int getSize(){
+        return snakeBody.size();
+    }
+
 
     private void snakeCalc() {
         head = snakeBody.peekFirst();
